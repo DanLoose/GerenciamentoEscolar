@@ -32,7 +32,7 @@
             </div>
         </form>
 
-        <p class="button">ENTRAR</p>
+        <p class="button" onclick="entrar()">ENTRAR</p>
 
         <p>Esqueci minha senha</p>
 
@@ -44,14 +44,14 @@
         
         <div class="box">
             
-            <span onclick="hideCadastro()" class="sair">X</span>
+            <span class="sair" onclick="hideCadastro()">X</span>
 
             <input type="text" name="name" id="nameCadastro" placeholder="Nome completo">
-            <input type="text" name="user" id="userCadastro" placeholder="Email">
+            <input type="email" name="email" id="userCadastro" placeholder="Email">
             <input type="password" name="password" id="passwordCadastro" placeholder="Senha">
             <input type="password" name="password2" id="passwordCadastro2" placeholder="Confirmar senha">
     
-            <button id="entrarC">Cadastre-se</button>
+            <button onclick="cadastrar()" id="cadastrar">Cadastre-se</button>
 
             <p>Você está se cadastrando como professor.</p>
         </div>

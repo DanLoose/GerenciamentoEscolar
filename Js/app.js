@@ -20,6 +20,7 @@ function cadastro(newEmail, newPassword){
 	auth.createUserWithEmailAndPassword(newEmail, newPassword)
 		.then(newUser => {
 			console.log(newUser);
+			hideCadastro();
 		})
 		.catch(err =>{
 			console.log(err);
@@ -35,7 +36,8 @@ function login(email, password){
 			console.log(loggedUser);
 		})
 		.catch((error) => {
-			console.log(error);
+			alert("usuario incorreto");
+			window.location.reload();
 		});
 }
 
