@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+:root{
+    --bg: rgb(179, 255, 231);
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap');
 
 body{
