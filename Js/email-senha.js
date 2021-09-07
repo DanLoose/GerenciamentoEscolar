@@ -1,87 +1,98 @@
-const buttonSignUp = document.querySelector("button[name=singup]");
-const buttonSignIn = document.querySelector("button[name=singin]");
+const inputName = document.querySelector('input[name=name]');
+const inputEmail = document.querySelector('input[name=email]');
+const inputSenha = document.querySelector('input[name=password]');
 
-const inputEmail = document.querySelector("input[name=email");
-const inputSenha = document.querySelector("input[name=password");
-const inputNome = document.querySelector("input[name=nome");
+const btnSignUp = document.querySelector('button[name=signup]');
+const btnSignIn = document.querySelector('button[name=signin]');
 
-const divUser = document.querySelector(".user");
-const spanName = document.querySelector("span.name");
-const btLogout = document.querySelector(".logout");
-const btReset = document.querySelector(".reset-password");
+const resetPassword = document.querySelector('a.reset-password');
+const logout = document.querySelector('a.logout');
+
+const logged = document.querySelector('div[class=user]');
+const loggedName = document.querySelector('span.name');
 
 const auth = firebase.auth();
+const db = firebase.firestore();
 
-const handleAuthError = (error) => {
+btnSignIn.addEventListener("click", () => {
 
-    if (error.code) {
-        switch (error.code) {
-            case 'auth/weak-password':
-                alert("Senha muito fraca");
-                break;
-            case 'auth/email-already-in-use':
-                alert("Email já está em uso")
-                break;
-            case 'auth/wrong-password':
-                alert("Senha errada")
-                break;
-            default:
-                alert("Erro desconhecido");
-        }
-    }
-}
+    if (inputEmail.value !== '') {
+        if (inputSenha.value !== '') {
 
-auth.onAuthStateChanged((user) => {
-    if (user) {
-        divUser.style.display = "block";
-        spanName.innerHTML = user.email;
-    } else {
-        divUser.style.display = "none";
-    }
-});
+            const formData = {
+                email: inputEmail.value,
+                senha: inputSenha.value,
+            }
 
-btReset.addEventListener("click", () => {
-    auth.sendPasswordResetEmail(inputEmail.value)
-        .then(result => {
-            alert("email enviado para reset de senha");
-        })
-        .catch(err => {
-            handleAuthError(err);
-        });
-})
-
-btLogout.addEventListener("click", () => {
-    auth.signOut();
-})
-
-buttonSignUp.addEventListener("click", () => {
-    auth.createUserWithEmailAndPassword(inputEmail.value, inputSenha.value)
-        .then(result => {
-
-            const user = result.user;
-            
-            user.sendEmailVerification()
-                .then(r => {
-                    alert("um email de confirmação foi enviado");
+            auth.signInWithEmailAndPassword(formData.email, formData.senha)
+                .then(data => {
+                    console.log(data);
                 })
                 .catch(err => {
-                    handleAuthError(err);
+                    console.log(err);
                 })
-
-            console.log(result);
-        })
-        .catch(err => {
-            handleAuthError(err);
-        })
+        }
+    }
 })
 
-buttonSignIn.addEventListener("click", () => {
-    auth.signInWithEmailAndPassword(inputEmail.value, inputSenha.value)
-        .then(result => {
-            alert("usuario conectado");
-            console.log(result);
+btnSignUp.addEventListener("click", () => {
+
+    if (inputEmail.value !== '') {
+        if (inputName.value !== '') {
+            if (inputSenha.value !== '') {
+
+                const formData = {
+                    nome: inputName.value,
+                    email: inputEmail.value,
+                    senha: inputSenha.value,
+                }
+
+                auth.createUserWithEmailAndPassword(formData.email, formData.senha)
+                    .then(data => {
+
+                        const uid = data.user.uid;
+                        
+                        db.collection('users').doc(uid).set({
+                            nome: formData.nome,
+                            email: formData.email,
+                        })
+                        .then(() =>{
+                            console.log("armazenado no firestore");
+                        })
+                        .catch(err =>{
+                            console.log(err);
+                        })
+
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            }
+        }
+    }
+})
+
+logout.addEventListener("click", () => {
+
+    auth.signOut()
+        .then(() => {
+            console.log("usuario deslogado");
         })
         .catch(err => {
-            handleAuthError(err);
-        })
+            console.log(err);
+        });
+
+    logged.style.display = "none";
+})
+
+
+
+auth.onAuthStateChanged(user => {
+    if(user){
+
+        const email = user.email;
+       
+        loggedName.innerHTML = email;
+        logged.style.display = "block";
+    }
 })
