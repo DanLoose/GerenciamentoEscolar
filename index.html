@@ -11,30 +11,37 @@
 
 <body>
 
-    <h1>Autentiacação de Usuários</h1>
+    <div class='spinner-wrapper' style="display: none;">
+        <div class="spinner"></div>
+    </div> 
 
-    <div class="user" style="display: none;">
-        <p>Seja bem vindo, <span class="name"></span>
-            <a href="javascript:void(0)" class="logout"> sair</a>
-        </p>
+    <div class="auth">
+
+        <div class="logo"> ESCOLA DANILO </div>
+
+        <div class="container">
+
+            <div class="entrar" onclick="showEntrar()">Entrar</div>
+            <div class="cadastrar" onclick="showCadastrar()">Cadastrar</div>
+
+            <form name="email-senha" class="form">
+        
+                <input type="text" name="name" id="name" placeholder="nome" style="display: none;">
+                <input type="email" name="email" id="email" placeholder="email">
+                <input type="password" name="password" id="password" placeholder="senha">
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="confirmar senha" style="display: none;">
+        
+                <button type="button" name="signup" style="display: none;"> Criar Conta </button>
+                <button type="button" name="signin"> Entrar </button>
+            </form>
+        </div>
+        
     </div>
 
-    <form name="email-senha">
-        
-        <label for="name"> Nome: </label>
-        <input type="text" name="name" id="name">
+    <div class="imagem">
+        <img src="./Assets/Welcome.jpg" alt="welcome">
+    </div>
 
-        <label for="email"> Email: </label>
-        <input type="email" name="email" id="email">
-
-        <label for="password"> Senha: </label>
-        <input type="password" name="password" id="password">
-
-        <a href="javascript:void(0)" class="reset-password"> resetar senha </a>
-
-        <button type="button" name="signup"> Criar Conta </button>
-        <button type="button" name="signin"> Entrar </button>
-    </form>
 
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
@@ -42,6 +49,7 @@
 
     <script src="./JS/init.js"></script>
     <script src="./JS/email-senha.js"></script>
+    <script src="./JS/interface.js"></script>
 </body>
 
 </html>
