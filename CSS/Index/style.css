@@ -1,0 +1,164 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --bg-container: #F1F1F1;
+    --txt-color: #707070;
+    --active-color: #AAAAAA;
+    --txt-font: "Segoe UI";
+}
+
+body{
+    font-family: var(--txt-font);
+    color: var(--txt-color);
+}
+
+.screen{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.logo{
+    font-size: 54px;
+}
+
+.container-formulario{
+    width: 70%;
+    max-width: 762px;
+}
+
+.botoes{
+    width: 100%;
+    display: flex;
+}
+
+.botoes button{
+    width: 50%;
+    padding: 1.5rem;
+    outline: none;
+    border-top: 1px solid var(--txt-color);
+    border-left: 1px solid var(--txt-color);
+    border-right: 1px solid var(--txt-color);
+    border-bottom: none;
+    font-family: var(--txt-font);
+    font-weight: bold;
+    font-size: 24px;
+    color: var(--txt-color);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.botoes button:hover{
+    background-color: #E4E4E4;
+}
+
+.formulario{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: var(--bg-container);
+    border: 1px solid var(--txt-color);
+    padding: 1.3rem;
+}
+
+.formulario input{
+    width: 100%;
+    max-height: 53px;
+    padding: 1rem;
+    outline: none;
+}
+
+.formulario button{
+    max-height: 53px;
+    padding: 0.5rem 2rem;
+    margin-top: 1.3rem;
+    background-color: white;
+    border: 1px solid var(--txt-color);
+    font-family: var(--txt-font);
+    color: var(--txt-color);
+    cursor: pointer;
+}
+
+.desenvolvido a{
+    text-decoration: none;
+    color: var(--txt-color);
+    font-weight: bold;
+}
+
+
+/* ALTERAÇÕES ESPECIAIS */
+.marg-5{
+    margin: 5px 0;
+}
+
+.botoes .active{
+    background-color: var(--active-color);
+    color: white;
+}
+.botoes .active:hover{
+    background-color: var(--active-color);
+}
+
+.passwordsAreNotTheSame{
+    color: rgb(114, 8, 8);
+    display: none;
+}
+
+/* TELA DE LOADING  */
+.spinner-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: #151515;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.spinner::before,
+.spinner:after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.spinner:before {
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(90deg, #ff00cc 0%,#333399 100% );
+    animation: spin .5s infinite linear;
+}
+.spinner:after {
+    width: 90%;
+    height: 90%;
+    background-color: #151515;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+
+}
