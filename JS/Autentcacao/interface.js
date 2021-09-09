@@ -44,3 +44,13 @@ function setLoadScreen(){
     loading.style.display = "flex";
 }
 
+function formContent(){
+    let formData = {
+        nome: inputName.value,
+        email: inputEmail.value,
+        password: inputPassword.value,
+        confirmPassword: inputConfirmPassword.value,
+    }
+
+    return formData
+}

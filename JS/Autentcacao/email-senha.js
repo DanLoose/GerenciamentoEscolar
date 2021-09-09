@@ -7,10 +7,7 @@ btnSignIn.addEventListener("click", () => {     //LOGIN
 
     if (inputEmail.value !== '' && inputPassword.value !== '') {
 
-        const formData = {
-            email: inputEmail.value,
-            password: inputPassword.value,
-        }
+        const formData = formContent();
 
         auth.signInWithEmailAndPassword(formData.email, formData.password)
             .then()
@@ -21,7 +18,7 @@ btnSignIn.addEventListener("click", () => {     //LOGIN
     }
 })
 
-btnSignUp.addEventListener("click", () => {     //SIGNUP
+btnSignUp.addEventListener("click", async () => {     //SIGNUP
 
     if (inputEmail.value !== '' && inputName.value !== '' && inputPassword.value !== '') {
         if (inputConfirmPassword.value === inputConfirmPassword.value) {
@@ -33,7 +30,7 @@ btnSignUp.addEventListener("click", () => {     //SIGNUP
                 tipe: "professor.html"
             }
 
-            auth.createUserWithEmailAndPassword(formData.email, formData.senha)
+            await auth.createUserWithEmailAndPassword(formData.email, formData.senha)
                 .then(data => {
 
                     const uid = data.user.uid;
@@ -61,7 +58,11 @@ btnSignUp.addEventListener("click", () => {     //SIGNUP
 auth.onAuthStateChanged(user => {
     if (user) {
 
-        window.location.href = "./Pages/professor.html";
+        setTimeout(redirect, 3000);
 
     }
 })
+
+function redirect(){
+    window.location.href = "./Pages/professor.html";
+}
