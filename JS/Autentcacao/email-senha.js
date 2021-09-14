@@ -64,5 +64,5 @@ auth.onAuthStateChanged(user => {
 })
 
 function redirect(){
-    window.location.href = "./Pages/professor.html";
+    window.location.href = "./Pages/Professor/gerenciar-turmas.html";
 }

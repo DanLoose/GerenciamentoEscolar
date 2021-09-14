@@ -52,5 +52,5 @@ function formContent(){
         confirmPassword: inputConfirmPassword.value,
     }
 
-    return formData
+    return formData;
 }
