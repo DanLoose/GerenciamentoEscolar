@@ -1,5 +1,13 @@
+const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
+
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use(bodyParser.json());
 
 //  === DATABSE CONNECTION === 
 const connection = require("./database/database");
@@ -9,8 +17,10 @@ connection.authenticate().then(() => {
     console.log(err);
 });
 
+
+//  === ROUTES ===
 app.get("/", (req, res) => {
-    res.send("hello world!");
+    res.render("index");
 });
 
 app.listen(8080, () => {
