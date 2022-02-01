@@ -23,6 +23,10 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
+app.get("/auth/signin", (req, res) => {
+    res.render("auth/signin");
+});
+
 app.listen(8080, () => {
     console.log("Server online...");
 });
